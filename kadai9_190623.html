@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+<h2>ToDoリスト</h2>
+
+<p>
+    <input type="radio" name="q1" value="全て" onclick="entryChange1();"> 全て
+    <input type="radio" name="q1" value="作業中" onclick="entryChange1();"> 作業中
+    <input type="radio" name="q1" value="完了" onclick="entryChange1();"> 完了
+</p>
+
+<script>
+    /**
+     * 行追加
+     */
+    var cell_id = 0;
+
+    function insertRow(id , task) {
+        // テーブル取得
+        var table = document.getElementById(id);
+        var result = document.getElementById(task).value;
+        // 行を行末に追加
+        var row = table.insertRow(-1);
+        // var val="testID";
+        // var idName = trElement.id ;
+        // trElement.id = "syncer" ;
+
+        // セルの挿入
+        var cell3 = row.insertCell(-1);
+        var cell2 = row.insertCell(-1);
+        var cell1 = row.insertCell(-1);
+
+        // ボタン用 HTML
+        var button2 = '<input type="button" value="作業中" onClick="OnOff(this);" />';
+        var button1 = '<input type="button" value="行削除" onclick="deleteRow(this)" />';
+
+        // 行数取得
+        var row_len = table.rows.length;
+        cell_id += 1;
+
+        // セルの内容入力
+        cell3.innerHTML = cell_id;
+        cell2.innerHTML = result;
+        cell1.innerHTML = button2 + button1;
+
+        row.className = 'onWork';
+
+        task = "";
+        return task;
+    }
+
+    /**
+     * 行削除
+     */
+    function deleteRow(obj) {
+        // 削除ボタンを押下された行を取得
+        tr = obj.parentNode.parentNode;
+        // trのインデックスを取得して行を削除する
+        tr.parentNode.deleteRow(tr.sectionRowIndex);
+    }
+    function changeButton(obj2) {
+        obj2 = 1;
+    }
+
+    /**
+     * 列追加
+     */
+    function insertColumn(id) {
+        // テーブル取得
+        var table = document.getElementById(id);
+        // 行数取得
+        var rows = table.rows.length;
+
+        // 各行末尾にセルを追加
+        for ( var i = 0; i < rows; i++) {
+            var cell = table.rows[i].insertCell(-1);
+            var cols = table.rows[i].cells.length;
+            if (cols > 10) {
+                continue;
+            }
+            cell.innerHTML = (i + 1) + '-' + (cols - 1);
+        }
+    }
+
+    /**
+     * 列削除
+     */
+    function deleteColumn(id) {
+        // テーブル取得
+        var table = document.getElementById(id);
+        // 行数取得
+        var rows = table.rows.length;
+
+        // 各行末のセルを削除
+        for ( var i = 0; i < rows; i++) {
+            var cols = table.rows[i].cells.length;
+            if (cols < 2) {
+                continue;
+            }
+            table.rows[i].deleteCell(-1);
+        }
+    }
+
+    function OnOff(lol){
+        tr = lol.parentNode.parentNode;
+        if (lol.value === "作業中") {
+            lol.value = "完了";
+            tr.className = 'complete';
+        } else if (lol.value === "完了") {
+            lol.value = "作業中";
+            tr.className = 'onWork';
+        }
+    }
+
+    function entryChange1() {
+        radio = document.getElementsByName('q1');
+
+        var taskStatus;
+
+        if (radio[0].checked) {
+            //フォーム
+            taskStatus = document.getElementsByClassName('onWork');
+            var i;
+            for(i = 0; i < taskStatus.length; i++) {
+                taskStatus[i].style.display = "";
+            }
+            taskStatus = document.getElementsByClassName('complete');
+            for(i = 0; i < taskStatus.length; i++) {
+                taskStatus[i].style.display = "";
+            }
+
+        } else if (radio[1].checked) {
+            //フォーム
+            taskStatus = document.getElementsByClassName('onWork');
+            for(i = 0; i < taskStatus.length; i++) {
+                taskStatus[i].style.display = "";
+            }
+            taskStatus = document.getElementsByClassName('complete');
+            for(i = 0; i < taskStatus.length; i++) {
+                taskStatus[i].style.display = "none";
+            }
+
+        } else if (radio[2].checked) {
+            //フォーム
+            taskStatus = document.getElementsByClassName('onWork');
+            for(i = 0; i < taskStatus.length; i++) {
+                taskStatus[i].style.display = "none";
+            }
+            taskStatus = document.getElementsByClassName('complete');
+            for(i = 0; i < taskStatus.length; i++) {
+                taskStatus[i].style.display = "";
+            }
+
+        }
+    }
+
+    //オンロードさせ、リロード時に選択を保持
+    window.onload = entryChange1;
+</script>
+
+<table id="sample1_table">
+    <tr>
+        <td nowrap>ID</td>
+        <td nowrap>コメント</td>
+        <td nowrap>状態</td>
+    </tr>
+</table>
+
+<h2>新規タスクの追加</h2>
+
+<input type="text" value="" id="txt1" name="newTask">
+<input type="submit" value="追加" onclick="insertRow('sample1_table','txt1')">
+
+
+<!--</form>-->
+</body>
+</html>
