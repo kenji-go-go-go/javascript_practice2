@@ -2,12 +2,6 @@
 
 let addbutton = document.getElementById('button'); //idが「button」の要素を取得
 
-//idが「button」の要素がクリックされたら実行
-
-addbutton.addEventListener("click", function() {
-    insertRow('sample1_table','txt1');
-}, false);
-
 let radioAll = document.getElementById('all');
 radioAll.addEventListener('click', function() {
     entryChange1('all');
@@ -76,8 +70,10 @@ addBtn.addEventListener('click', () => {
 
     newTask.value = '';
 
+// 「作業中」と「完了」の切り替え
     stateBtn.addEventListener('click', () => {
         stateCount++;
+        // stateCount:偶数なら作業中、奇数なら完了
         if (stateCount % 2 === 1) {
             stateBtn.textContent = completedText;
             trElement.className = completedClass;
@@ -101,110 +97,53 @@ addBtn.addEventListener('click', () => {
     });
 });
 
-/**
- * 行削除
- */
-function deleteRow(obj) {
-    // 削除ボタンを押下された行を取得
-    var tr = obj.parentNode.parentNode;
-    // trのインデックスを取得して行を削除する
-    tr.parentNode.deleteRow(tr.sectionRowIndex);
-}
-function changeButton(obj2) {
-    obj2 = 1;
-}
-
-/**
- * 列追加
- */
-function insertColumn(id) {
-    // テーブル取得
-    var table = document.getElementById(id);
-    // 行数取得
-    var rows = table.rows.length;
-
-    // 各行末尾にセルを追加
-    for ( var i = 0; i < rows; i++) {
-        var cell = table.rows[i].insertCell(-1);
-        var cols = table.rows[i].cells.length;
-        if (cols > 10) {
-            continue;
-        }
-        cell.innerHTML = (i + 1) + '-' + (cols - 1);
-    }
-}
-
-/**
- * 列削除
- */
-function deleteColumn(id) {
-    // テーブル取得
-    var table = document.getElementById(id);
-    // 行数取得
-    var rows = table.rows.length;
-
-    // 各行末のセルを削除
-    for ( var i = 0; i < rows; i++) {
-        var cols = table.rows[i].cells.length;
-        if (cols < 2) {
-            continue;
-        }
-        table.rows[i].deleteCell(-1);
-    }
-}
-
-function OnOff(lol){
-    var tr = lol.parentNode.parentNode;
-    if (lol.value === "作業中") {
-        lol.value = "完了";
-        tr.className = 'complete';
-    } else if (lol.value === "完了") {
-        lol.value = "作業中";
-        tr.className = 'onWork';
-    }
-}
-
 function entryChange1() {
-    var radio = document.getElementsByName('q1');
+    const radio = document.getElementsByName('q1');
 
     console.log(radio);
 
-    var taskStatus;
+    let taskStatus = '';
+    let i = 0;
+    var lists = [0, 1, 2, 3, 4, 5];
 
     if (radio[0].checked) {
         //フォーム
         taskStatus = document.getElementsByClassName('onWork');
-        var i;
-        for(i = 0; i < taskStatus.length; i++) {
-            taskStatus[i].style.display = "";
-        }
+        taskStatus = Array.from( taskStatus ) ;
+        taskStatus.forEach( function( element ) {
+            element.style.display = "";
+        });
         taskStatus = document.getElementsByClassName('complete');
-        for(i = 0; i < taskStatus.length; i++) {
-            taskStatus[i].style.display = "";
-        }
+        taskStatus = Array.from( taskStatus ) ;
+        taskStatus.forEach( function( element ) {
+            element.style.display = "";
+        });
 
     } else if (radio[1].checked) {
         //フォーム
         taskStatus = document.getElementsByClassName('onWork');
-        for(i = 0; i < taskStatus.length; i++) {
-            taskStatus[i].style.display = "";
-        }
+        taskStatus = Array.from( taskStatus ) ;
+        taskStatus.forEach( function( element ) {
+            element.style.display = "";
+        });
         taskStatus = document.getElementsByClassName('complete');
-        for(i = 0; i < taskStatus.length; i++) {
-            taskStatus[i].style.display = "none";
-        }
+        taskStatus = Array.from( taskStatus ) ;
+        taskStatus.forEach( function( element ) {
+            element.style.display = "none";
+        });
 
     } else if (radio[2].checked) {
         //フォーム
         taskStatus = document.getElementsByClassName('onWork');
-        for(i = 0; i < taskStatus.length; i++) {
-            taskStatus[i].style.display = "none";
-        }
+        taskStatus = Array.from( taskStatus ) ;
+        taskStatus.forEach( function( element ) {
+            element.style.display = "none";
+        });
         taskStatus = document.getElementsByClassName('complete');
-        for(i = 0; i < taskStatus.length; i++) {
-            taskStatus[i].style.display = "";
-        }
-
+        taskStatus = Array.from( taskStatus ) ;
+        taskStatus.forEach( function( element ) {
+            element.style.display = "";
+        });
     }
 }
 
