@@ -104,7 +104,6 @@ function entryChange1() {
 
     let taskStatus = '';
     let i = 0;
-    var lists = [0, 1, 2, 3, 4, 5];
 
     if (radio[0].checked) {
         //フォーム
