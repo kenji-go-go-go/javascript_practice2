@@ -102,45 +102,39 @@ function entryChange() {
 
     console.log(radio);
 
-    let taskStatus = '';
+    let taskStatusOnWork = '';
+    let taskStatusComplete = '';
     let i = 0;
+
+    taskStatusOnWork = document.getElementsByClassName('onWork');
+    taskStatusOnWork = Array.from( taskStatusOnWork ) ;
+    taskStatusComplete = document.getElementsByClassName('complete');
+    taskStatusComplete = Array.from( taskStatusComplete ) ;
 
     if (radio[0].checked) {
         //フォーム
-        taskStatus = document.getElementsByClassName('onWork');
-        taskStatus = Array.from( taskStatus ) ;
-        taskStatus.forEach( function( element ) {
+        taskStatusOnWork.forEach( function( element ) {
             element.style.display = "";
         });
-        taskStatus = document.getElementsByClassName('complete');
-        taskStatus = Array.from( taskStatus ) ;
-        taskStatus.forEach( function( element ) {
+        taskStatusComplete.forEach( function( element ) {
             element.style.display = "";
         });
 
     } else if (radio[1].checked) {
         //フォーム
-        taskStatus = document.getElementsByClassName('onWork');
-        taskStatus = Array.from( taskStatus ) ;
-        taskStatus.forEach( function( element ) {
+        taskStatusOnWork.forEach( function( element ) {
             element.style.display = "";
         });
-        taskStatus = document.getElementsByClassName('complete');
-        taskStatus = Array.from( taskStatus ) ;
-        taskStatus.forEach( function( element ) {
+        taskStatusComplete.forEach( function( element ) {
             element.style.display = "none";
         });
 
     } else if (radio[2].checked) {
         //フォーム
-        taskStatus = document.getElementsByClassName('onWork');
-        taskStatus = Array.from( taskStatus ) ;
-        taskStatus.forEach( function( element ) {
+        taskStatusOnWork.forEach( function( element ) {
             element.style.display = "none";
         });
-        taskStatus = document.getElementsByClassName('complete');
-        taskStatus = Array.from( taskStatus ) ;
-        taskStatus.forEach( function( element ) {
+        taskStatusComplete.forEach( function( element ) {
             element.style.display = "";
         });
     }
