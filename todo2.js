@@ -5,17 +5,17 @@ let addbutton = document.getElementById('button'); //idが「button」の要素�
 let radioAll = document.getElementById('all');
 radioAll.addEventListener('click', function() {
     entryChange('all');
-}, false);
+});
 
 let radioNow = document.getElementById('now');
 radioNow.addEventListener('click', function () {
     entryChange();
-}, false);
+});
 
 let radioComplete = document.getElementById('complete');
 radioComplete.addEventListener('click', function () {
     entryChange();
-}, false);
+});
 /*** ここまで ***/
 
 const addBtn = document.getElementById('button');
