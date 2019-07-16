@@ -4,17 +4,17 @@ let addbutton = document.getElementById('button'); //idが「button」の要素�
 
 let radioAll = document.getElementById('all');
 radioAll.addEventListener('click', function() {
-    entryChange1('all');
+    entryChange('all');
 }, false);
 
 let radioNow = document.getElementById('now');
 radioNow.addEventListener('click', function () {
-    entryChange1();
+    entryChange();
 }, false);
 
 let radioComplete = document.getElementById('complete');
 radioComplete.addEventListener('click', function () {
-    entryChange1();
+    entryChange();
 }, false);
 /*** ここまで ***/
 
@@ -97,7 +97,7 @@ addBtn.addEventListener('click', () => {
     });
 });
 
-function entryChange1() {
+function entryChange() {
     const radio = document.getElementsByName('q1');
 
     console.log(radio);
@@ -145,6 +145,3 @@ function entryChange1() {
         });
     }
 }
-
-//オンロードさせ、リロード時に選択を保持
-// window.onload = entryChange1;
